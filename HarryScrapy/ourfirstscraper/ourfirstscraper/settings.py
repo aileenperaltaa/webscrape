@@ -1,4 +1,4 @@
-# Scrapy settings for ngo project
+# Scrapy settings for ourfirstscraper project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,21 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'ngo'
+BOT_NAME = 'ourfirstscraper'
 
-SPIDER_MODULES = ['ngo.spiders']
-NEWSPIDER_MODULE = 'ngo.spiders'
+SPIDER_MODULES = ['ourfirstscraper.spiders']
+NEWSPIDER_MODULE = 'ourfirstscraper.spiders'
+
+#Export as CSV Feed
+FEED_FORMAT = "csv"
+FEED_URI = "IndiaNGO.csv"
+
+FEED_FORMAT = "csv"
+FEED_URI = "IndiaNGO.json"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'ngo (+http://www.yourdomain.com)'
+#USER_AGENT = 'ourfirstscraper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,13 +52,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'ngo.middlewares.NgoSpiderMiddleware': 543,
+#    'ourfirstscraper.middlewares.OurfirstscraperSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'ngo.middlewares.NgoDownloaderMiddleware': 543,
+#    'ourfirstscraper.middlewares.OurfirstscraperDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +70,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'ngo.pipelines.NgoPipeline': 300,
+#    'ourfirstscraper.pipelines.OurfirstscraperPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
