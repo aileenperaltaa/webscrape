@@ -9,17 +9,52 @@ class HelpYourNgoSpider(scrapy.Spider):
 
 
     def parse(self, response):
+        """
+        Main parse method. Performs a depth first search on
+        helpyourngo in the following format:
+        frontpage->ngo1->ngo1summary->frontpage->ngo2->ngo2summary->...
+
+        Attributes
+        ----------
+        ngo_links:
+            List of all the links on the homepage  
+        """
         ngo_links = response.css('.font14 a')
         yield from response.follow_all(ngo_links, self.parse_ngo)
 
 
     def parse_ngo(self, response):
+        """
+        Traverse from the ngo page to ngo_summary page.
+        This function handles this format from above:
+        ngo1->ngo1summary
+
+        Params
+        ------
+        response:
+            The main page for this ngo
+
+        Attributes
+        ----------
+        ngo_summary:
+            Link to the ngo_summary page  
+        """
         ngo_summary = response.css('.activediv+ .newtabdiv a::attr(href)').get()
         if ngo_summary is not None:
             yield response.follow(ngo_summary, self.parse_ngo_summary)
 
 
     def parse_ngo_summary(self, response):
+        """
+        Extracts the data from the ngo_summary page. Note that
+        getting the description involves extracting the text from
+        all descendants of the associated td tag.
+
+        Params
+        ------
+        response:
+            The ngo_summary page
+        """
         # For the daanmatch_ngo table
         name = response.css(".font24::text, .font19::text").extract_first()
         address = response.css(".valign\=~ .font11+ .font11::text").extract_first()
@@ -30,7 +65,7 @@ class HelpYourNgoSpider(scrapy.Spider):
         # Get latest updated year
         last_updated_years = response.css(".fitexthdr_new+ .fitexthdr_new::text").extract()
         if last_updated_years:
-            last_updated = last_updated_years[-1]
+            last_updated = last_updated_years[-1] # last year is most recent
         else:
             last_updated = None
 
