@@ -11,8 +11,8 @@ BOT_NAME = 'Ge_second'
 
 SPIDER_MODULES = ['Ge_second.spiders']
 NEWSPIDER_MODULE = 'Ge_second.spiders'
-FEED_FORMAT = "json"
-FEED_URI = "InvestIndia.json"
+FEED_FORMAT = "csv"
+FEED_URI = "InvestIndia.csv"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'Ge_second (+http://www.yourdomain.com)'
