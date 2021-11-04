@@ -18,13 +18,15 @@ class SecondbotSpider(scrapy.Spider):
             if not description:
                 description = b[1].css("::text").extract()[0]
             state = b[2].css("td::text").extract()[0]
+            emails = "None"
             emails = b[3].css("p::text").extract()
-            Contact = "\n  ".join(b[3].css("a::attr(href)").extract() + emails)
+            Contact = "\n  ".join(b[3].css("a::attr(href)").extract())
             scraped_info = {
                 'Name' : name,
                 'Description': description,
                 'State': state,
-                'Contact' : Contact
+                'Contact' : Contact,
+                "Email" : emails
             }
 
             #yield or give the scraped info to scrapy
